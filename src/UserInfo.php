@@ -77,6 +77,45 @@
 		return $os_platform;
 	}
 
+	/**
+	 * Get the current user agent
+	 * @return string  
+	 * 
+	 */
+	public static function  getBrowser() {
+
+		$user_agent= self::get_user_agent();
+
+		$browser        =   "Unknown Browser";
+
+		$browser_array  =   array(
+			'/msie/i'       =>  'Internet Explorer',
+			'/Trident/i'    =>  'Internet Explorer',
+			'/firefox/i'    =>  'Firefox',
+			'/safari/i'     =>  'Safari',
+			'/chrome/i'     =>  'Chrome',
+			'/edge/i'       =>  'Edge',
+			'/opera/i'      =>  'Opera',
+			'/netscape/i'   =>  'Netscape',
+			'/maxthon/i'    =>  'Maxthon',
+			'/brave/i'		=>	'Brave',
+			'/konqueror/i'  =>  'Konqueror',
+			'/ubrowser/i'   =>  'UC Browser',
+			'/mobile/i'     =>  'Handheld Browser'
+		);
+
+		foreach ($browser_array as $regex => $value) {
+
+			if (preg_match($regex, $user_agent)) {
+				$browser    =   $value;
+			}
+
+		}
+
+		return $browser;
+
+	}
+	
 	private static function get_user_agent() {
 		return  $_SERVER['HTTP_USER_AGENT'];
 	}
